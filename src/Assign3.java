@@ -73,8 +73,42 @@ class Card
     	return suit;
     }
     
+    /**
+     * 
+     * @return
+     */
     public char getValue()
     {
     	return value;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean getFlag()
+    {
+    	return errorFlag;
+    }
+    
+    /**
+     * 
+     * @param card
+     * @return
+     */
+    public boolean equals(Card card)
+    {
+    	return false;    	
+    }
+    
+    /**
+     * 
+     * @param value
+     * @param suit
+     * @return
+     */
+    private boolean isValid(char value, Suit suit)    
+    {
+    	return false;
     }
 }
