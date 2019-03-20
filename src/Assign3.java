@@ -6,12 +6,12 @@
  */
 public class Assign3 
 {
-	
-	public static void main(String[] args)
-	{
-		
-	}
-	
+    
+    public static void main(String[] args)
+    {
+        
+    }
+    
 }
 /**
  * 
@@ -19,20 +19,26 @@ public class Assign3
  * @version 03/20/2019
  */
 class Card 
-{	
-	enum Suit {clubs, diamonds, hearts, spades};
-	Suit suit;
-	char value;
-	boolean errorFlag;
-	
-	public Card()
-	{
-		value = 'A';
-		suit = Suit.spades;
-	}
-	public Card(char value, Suit suit)
-	{
-		this.value = value;
-		this.suit = suit;
-	}
+{    
+    enum Suit {clubs, diamonds, hearts, spades};
+    Suit suit;
+    char value;
+    boolean errorFlag;
+    
+    public Card()
+    {
+        value = 'A';
+        suit = Suit.spades;
+    }
+    
+    public Card(char value, Suit suit)
+    {
+        this.value = value;
+        this.suit = suit;
+    }
+    
+    public String toString()
+    {
+        return 
+    }
 }
