@@ -9,7 +9,13 @@ public class Assign3
     
     public static void main(String[] args)
     {
+        Card testA = new Card();
+        Card testB = new Card('2', Card.Suit.clubs);
+        Card testC = new Card('0', Card.Suit.hearts);
         
+        System.out.println(testA.toString());
+        System.out.println(testB.toString());
+        System.out.println(testC.toString());
     }
     
 }
@@ -50,7 +56,7 @@ class Card
      */
     public String toString()
     {
-        return "string";
+        return Character.toString(value) + " of " + suit;
     }
     
     /**
@@ -109,6 +115,10 @@ class Card
      */
     private boolean isValid(char value, Suit suit)    
     {
+    	if (suit.equals(this.suit))
+    	{
+    		System.out.println("True");
+    	}
     	return false;
     }
 }
