@@ -14,6 +14,10 @@ public class Assign3
         //System.out.println(testB.toString());
         Card testC = new Card('0', Card.Suit.hearts);
         //System.out.println(testC.toString());
+        testC.set('3', Card.Suit.diamonds);
+        System.out.println(testC.toString());
+        testA.set('0', Card.Suit.hearts);
+        System.out.println(testA.toString());
     }
 }
 /**
