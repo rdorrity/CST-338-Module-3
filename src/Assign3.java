@@ -14,6 +14,10 @@ public class Assign3
         //System.out.println(testB.toString());
         Card testC = new Card('0', Card.Suit.hearts);
         //System.out.println(testC.toString());
+        testC.set('3', Card.Suit.diamonds);
+        System.out.println(testC.toString());
+        testA.set('0', Card.Suit.hearts);
+        System.out.println(testA.toString());
     }
 }
 /**
@@ -23,12 +27,12 @@ public class Assign3
  */
 class Card
 {
-    char[] cardRank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+    private char[] cardRank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
             'Q', 'K'};
     enum Suit {clubs, diamonds, hearts, spades};
-    Suit suit;
-    char value;
-    boolean errorFlag = true;
+    private Suit suit;
+    private char value;
+    private boolean errorFlag = true;
 
     /**
      *
@@ -140,5 +144,46 @@ class Card
         }
         //System.out.println("Invalid");
         return true;
+    }
+}
+class Hand
+{
+    public int MAX_CARDS = 50;
+    Card[] myCards;
+    int numCards;
+
+    public Hand()
+    {
+
+    }
+
+    void resetHand()
+    {
+
+    }
+
+    boolean takeCard(Card card)
+    {
+        return true;
+    }
+
+    Card playCard()
+    {
+        return myCards[0];
+    }
+
+    public String toString()
+    {
+        return "string";
+    }
+
+    public int getNumCards()
+    {
+        return numCards;
+    }
+
+    Card InspectCard(int k)
+    {
+        return myCards[k];
     }
 }
