@@ -35,7 +35,7 @@ class Card
             'Q', 'K'};
     enum Suit {clubs, diamonds, hearts, spades}
 
-   private Suit suit;
+    private Suit suit;
     private char value;
     private boolean errorFlag = true;
 
@@ -151,46 +151,105 @@ class Card
         return true;
     }
 }
+
+/** Hand class
+ * Has cards (Stored in private instance variable myCards, an array of Cards
+ * Represents a player's hand of cards
+ */
 class Hand
 {
-    public int MAX_CARDS = 50;
-    Card[] myCards;
-    int numCards;
+   public int MAX_CARDS = 50; // Max cards a Hand can have
 
-    public Hand()
-    {
+   // private instance variables
+   Card[] myCards;
+   int numCards;
 
-    }
+   // Zero argument constructor
+   // Initalizes numCards to maximum length specified by MAX_CARDS
+   // and initalizes numCards to 0 (empty hand)
+   public Hand()
+   {
+      myCards = new Card[MAX_CARDS];
+      numCards = 0;
+   }
 
-    void resetHand()
-    {
+   // Accessor methods
 
-    }
+   // Returns myCard array reference
+   public Card[] getMyCards()
+   {
+      return myCards;
+   }
 
-    boolean takeCard(Card card)
-    {
-        return true;
-    }
+   // Returns number of cards
+   public int getNumCards()
+   {
+      return numCards;
+   }
 
-    Card playCard()
-    {
-        return myCards[0];
-    }
+   // Returns Card at index k in myCards
+   public Card inspectCard(int k)
+   {
+      if(k < myCards.length)
+      {
+         return myCards[k]; // return card if k is good
+      }
+      return new Card('X', Card.Suit.diamonds); // invalid card if k is bad
 
-    public String toString()
-    {
-        return "string";
-    }
+   }
 
-    public int getNumCards()
-    {
-        return numCards;
-    }
+   // Sets all values in myCards to null
+   // Represents removing all cards from Hand
+   public void resetHand()
+   {
+      for(int index = 0; index < myCards.length; index++)
+      {
+         myCards[index] = null;
+      }
 
-    Card InspectCard(int k)
-    {
-        return myCards[k];
-    }
+   }
+
+   // Take a card only if we can fit it in the Hand and increase numCards
+   // Return if successful or not (boolean)
+   public boolean takeCard(Card card)
+   {
+
+      if(numCards < MAX_CARDS)
+      {
+         myCards[numCards] = card;
+         numCards++;
+         return true;
+      }
+      return false;
+
+   }
+
+   // return and remove the Card last entered into the Hand
+   public Card playCard()
+   {
+      return myCards[numCards--];
+   }
+
+
+   @Override
+   public String toString()
+   {
+      String result = "Hand = ( ";
+      for(int index = 0; index < myCards.length; index++)
+      {
+         if(myCards[index] != null)
+         {
+            result += myCards[index] + ", ";
+            if (index % 5 == 3)
+            {
+               result += "\n";
+            }
+         }
+
+      }
+      result = result.substring(0, result.length()-2) + " )";
+      return result;
+   }
 }
 
 /**
@@ -198,11 +257,10 @@ class Hand
  * Incorporates Card objects. Interacts with Hand objects through card
  * distribution.
  */
-
 class Deck
 {
    // Class variables
-   // Maximum number of 62 card decks
+   // Maximum number of 52 card decks
    public final int MAX_CARDS = 6 * 52;
    // Static array that holds 52 references to standard Card objects.
    private static Card [] masterPack;
@@ -215,23 +273,21 @@ class Deck
     */
    public Deck()
    {
-
-      for(int i = 0; i <= 52; i++)
-      {
-         masterPack[i] = new Card();
-      }
-
-      numPacks++;
-
+      new Deck();
    }
 
    /**
-    * Overloaded constructor for Deck objects.
+    * Overloaded constructor for Deck objects. Sets number of packs by
+    * default to 1.
     * @param numPacks
     */
    public Deck(int numPacks)
    {
+      allocateMasterPack();
       this.numPacks = 1;
+      init(numPacks);
+      cards = new Card[MAX_CARDS];
+      this.topCard = cards.length - 1;
    }
 
    /**
@@ -240,15 +296,50 @@ class Deck
     */
    public void init(int numPacks)
    {
+      int cardIndex = 0;
 
+      for (int initPacks = 0; initPacks < numPacks; initPacks++)
+         for (int mpIndex = 0; mpIndex < 52; mpIndex++)
+         {
+            cards[cardIndex] = masterPack[mpIndex];
+            cardIndex++;
+         }
    }
 
    /**
-    * Allocates master pack. Checks if master pack is already initialized.
+    * Allocates master pack. Checks if master pack is already initialized. If
+    * true, returns without doing anything.
     */
    private static void allocateMasterPack()
    {
+      if (masterPack != null)
+      {
+         // Debug statement
+         System.out.println("masterPack already exists.");
+         return;
+      }
+      else
+      {
+         // Allocate and initialize array of Card objects
+         // Variable to track Card object position in masterPack
+         masterPack = new Card[52];
+         int cardIndex = 0;
 
+         // Initialize arrays of Card suits and values
+         char values [] = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+                 'Q', 'K', 'A'};
+         Card.Suit [] suits = {Card.Suit.clubs, Card.Suit.diamonds,
+                 Card.Suit.hearts, Card.Suit.spades};
+
+         for (int suitIndex = 0; suitIndex <= suits.length; suitIndex++)
+
+            for (int valueIndex = 0; valueIndex <= values.length; valueIndex++)
+            {
+               masterPack[cardIndex] = new Card(values[valueIndex],
+                       suits[suitIndex]);
+               cardIndex++;
+            }
+      }
    }
 
    /**
@@ -256,7 +347,23 @@ class Deck
     */
    public void shuffle()
    {
+      Card temp;
 
+      // Number of swaps done in Card array
+      int swaps = 8;
+
+      for (int i = 0; i < swaps; i++)
+      {
+         // Create two random index values within bounds of array for swapping
+         int tempIndex1 = (int)(Math.random() * 52);
+         int tempIndex2 = (int)(Math.random() * 52);
+
+         // Set cards at index values
+         temp = cards[tempIndex1];
+         cards[tempIndex1] = cards[tempIndex2];
+         cards[tempIndex2] = temp;
+
+      }
    }
 
    /**
@@ -265,11 +372,19 @@ class Deck
     */
    public Card dealCard()
    {
+      Card dealtCard = cards[topCard];
 
+      if (topCard >= 0)
+      {
+         cards[topCard] = null;
+         topCard--;
+      }
+
+      return dealtCard;
    }
 
    /**
-    * Getter for topCard
+    * Getter for topCard.
     * @return Value of top Card in deck
     */
    public int getTopCard()
@@ -281,10 +396,14 @@ class Deck
     * Getter for individual Card object. Returns a Card with errorFlag = true
     * if int i is invalid.
     * @param i
-    * @return Individual Card object
+    * @return Individual invalid Card object
     */
    public Card inspectCard(int i)
    {
-
+      if (i < topCard)
+      {
+         return cards[i];
+      }
+      return new Card('E', Card.Suit.diamonds);
    }
 }
