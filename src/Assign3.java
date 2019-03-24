@@ -215,9 +215,8 @@ class Deck
     */
    public Deck()
    {
-      int i;
 
-      for(i = 0; i <= 52, i++)
+      for(int i = 0; i <= 52; i++)
       {
          masterPack[i] = new Card();
       }
@@ -240,6 +239,14 @@ class Deck
     * @param numPacks
     */
    public void init(int numPacks)
+   {
+
+   }
+
+   /**
+    * Allocates master pack. Checks if master pack is already initialized.
+    */
+   private static void allocateMasterPack()
    {
 
    }
