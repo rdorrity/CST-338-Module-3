@@ -33,8 +33,9 @@ class Card
 {
     private char[] cardRank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
             'Q', 'K'};
-    enum Suit {clubs, diamonds, hearts, spades};
-    private Suit suit;
+    enum Suit {clubs, diamonds, hearts, spades}
+
+   private Suit suit;
     private char value;
     private boolean errorFlag = true;
 
@@ -70,7 +71,7 @@ class Card
             return "Invalid";
         }
         else
-            return Character.toString(value) + " of " + suit;
+            return value + " of " + suit;
     }
 
     /**
@@ -122,7 +123,7 @@ class Card
 
     /**
      * Checks if a Card object is equal to another.
-     * @param Card object
+     * @param
      * @return True if Card objects are equal, false otherwise
      */
     public boolean equals(Card card)
@@ -210,8 +211,24 @@ class Deck
    private int numPacks;
 
    /**
+    * Default constructor for Deck objects.
+    */
+   public Deck()
+   {
+      int i;
+
+      for(i = 0; i <= 52, i++)
+      {
+         masterPack[i] = new Card();
+      }
+
+      numPacks++;
+
+   }
+
+   /**
     * Overloaded constructor for Deck objects.
-    * @param Number of Card decks
+    * @param numPacks
     */
    public Deck(int numPacks)
    {
@@ -220,7 +237,7 @@ class Deck
 
    /**
     * Repopulates Card array with standard Card objects.
-    * @param Number of Card decks
+    * @param numPacks
     */
    public void init(int numPacks)
    {
