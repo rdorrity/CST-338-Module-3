@@ -30,10 +30,10 @@ public class Assign3
        System.out.print(testDeck.toString());
 
        //Shuffle deck, reprint
-       //testDeck.shuffle();
-       //System.out.print("\n");
-       //System.out.println("Shuffled testDeck:\n");
-       //System.out.print(testDeck.toString());
+       testDeck.shuffle();
+       System.out.print("\n");
+       System.out.println("Shuffled testDeck:\n");
+       System.out.print(testDeck.toString());
 
     }
 }
@@ -298,9 +298,9 @@ class Deck
    public Deck(int numPacks)
    {
       allocateMasterPack();
-      this.numPacks = numPacks;
-      cards = new Card[numPacks * 52];
+      this.numPacks = 1;
       init(numPacks);
+      cards = new Card[numPacks * 52];
    }
 
    /**
@@ -375,6 +375,7 @@ class Deck
          temp = cards[tempIndex1];
          cards[tempIndex1] = cards[tempIndex2];
          cards[tempIndex2] = temp;
+
       }
    }
 
@@ -427,16 +428,19 @@ class Deck
    public String toString()
    {
       StringBuilder decksb = new StringBuilder();
+      String deckString;
       // Debug only
       int cardTotal = 0;
 
-      for (int i = 0; i < cards.length; i++)
+      for (int i = 0; i <= cards.length; i++)
       {
-         decksb.append(cards[i] + "\n");
+         decksb.append(cards[i]);
          cardTotal++;
       }
 
-      return decksb.toString();
+      System.out.print("Number of cards: " + cardTotal);
+      deckString = decksb.toString();
+      return deckString;
 
    }
 }
