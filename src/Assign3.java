@@ -12,27 +12,27 @@ public class Assign3
 {
     public static void main(String[] args)
     {
-//        Card testA = new Card();
-//        //System.out.println(testA.toString());
-//        Card testB = new Card('2', Card.Suit.clubs);
-//        //System.out.println(testB.toString());
-//        Card testC = new Card('0', Card.Suit.hearts);
-//        //System.out.println(testC.toString());
-//        testC.set('3', Card.Suit.diamonds);
-//        System.out.println(testC.toString());
-//        testA.set('0', Card.Suit.hearts);
-//        System.out.println(testA.toString());
+        Card testA = new Card();
+        //System.out.println(testA.toString());
+        Card testB = new Card('2', Card.Suit.clubs);
+        //System.out.println(testB.toString());
+        Card testC = new Card('0', Card.Suit.hearts);
+        //System.out.println(testC.toString());
+        testC.set('3', Card.Suit.diamonds);
+        System.out.println(testC.toString());
+        testA.set('0', Card.Suit.hearts);
+        System.out.println(testA.toString());
 
-        // Print out test Deck object
+        // Create test deck, print out contents
         System.out.print("\n");
         System.out.println("Test deck 1:\n");
         Deck testDeck = new Deck();
         System.out.print(testDeck.toString());
 
-        //Shuffle deck, reprint
-        // testDeck.shuffle();
+        // Shuffle deck, reprint
+        testDeck.shuffle();
         System.out.print("\n");
-        System.out.println("Shuffled testDeck:\n");
+        System.out.println("Shuffled test deck:\n");
         System.out.print(testDeck.toString());
 
     }
@@ -43,91 +43,128 @@ public class Assign3
  * @author Ryan Dorrity, Cody Young, Sara Kazemi, Nathan Warren-Acord
  * @version 03/20/2019
  */
-
-/* Card class is defined by a value (char) and suit (enum Suit) as well as
- * if it is in a valid state (boolean errorFlag)
- */
-
 class Card
 {
-    // enum Suit defines valid suits
-    public static enum Suit
-    {
-        hearts, diamonds, spades, clubs
-    }
+    private char[] cardRank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+            'Q', 'K'};
+    enum Suit {clubs, diamonds, hearts, spades}
 
-    // private instance variables
-    private char value;
     private Suit suit;
-    private boolean errorFlag;
+    private char value;
+    private boolean errorFlag = true;
 
-    // 0-arg constructor - Creates a default Card - A of spades
+    /**
+     * Default constructor for Card objects.
+     */
     public Card()
     {
         value = 'A';
         suit = Suit.spades;
+        errorFlag = isValid('A', Suit.spades);
+        //System.out.println(toString());
     }
 
-    // 2-arg constructor
+    /**
+     *
+     * @param value
+     * @param suit
+     */
     public Card(char value, Suit suit)
     {
-        set(value, suit);
+        errorFlag = set(value, suit);
+        //System.out.println(toString());
     }
 
-    // Mutator method to set value and suit
-    public boolean set(char value, Suit suit)
+    /**
+     *
+     */
+    public String toString()
     {
-        this.value = value;
-        this.suit = suit;
-        errorFlag = !isValid(value, suit); // set errorFlag to opposite of isValid
-        return true;
+        if (errorFlag == true)
+        {
+            return "Invalid";
+        }
+        else
+            return value + " of " + suit;
     }
 
-    // Accessor method returns Card's value (char)
-    public char getValue()
+    /**
+     * Setter for Card objects.
+     * @param value
+     * @param suit
+     * @return If no errors are raised, sets suit of Card object.
+     */
+    boolean set(char value, Suit suit)
     {
-        return value;
+        errorFlag = isValid(value, suit);
+        if (!errorFlag)
+        {
+            this.value = value;
+            this.suit = suit;
+            return errorFlag;
+        }
+        else
+            this.suit = suit;
+        return errorFlag;
     }
 
-    // Accessor method returns Card's suit (enum)
+    /**
+     * Getter for Suit values.
+     * @return Suit of card
+     */
     public Suit getSuit()
     {
         return suit;
     }
 
-    // Accessor method returns Card's errorFlag (boolean)
-    public boolean getErrorFlag()
+    /**
+     * Getter for numerical card values.
+     * @return Value of card as a char.
+     */
+    public char getValue()
+    {
+        return value;
+    }
+
+    /**
+     * Getter for the Card object boolean var, errorFlag.
+     * @return Status of error flag.
+     */
+    public boolean getFlag()
     {
         return errorFlag;
     }
 
-    // Checks if Card is in a valid state (valid value)
+    /**
+     * Checks if a Card object is equal to another.
+     * @param
+     * @return True if Card objects are equal, false otherwise
+     */
+    public boolean equals(Card card)
+    {
+        return false;
+    }
+
+    /**
+     * Checks if a Card object holds a valid suit and numeric value.
+     * @param value
+     * @param suit
+     * @return True if Card object has valid parameters, false otherwise.
+     */
     private boolean isValid(char value, Suit suit)
     {
-        //  returns true if we have a valid value
-        return value == 'A' || value == 'K' || value == 'Q' || value == 'J' ||
-                value == 'T' || (value >= '2' && value <= '9' );
-    }
-
-    // Checks if two cards have equivalent values and Suits
-    public boolean equals(Card other)
-    {
-        return this.value == other.value && this.suit.equals(other.suit);
-    }
-
-    // Overridden toString method displays value and suit of Card
-    @Override
-    public String toString()
-    {
-        if(!errorFlag)
+        for (int i = 0; i < cardRank.length; i++)
         {
-            return value + " of " + suit;
+            if (cardRank[i] == value)
+            {
+                //System.out.println("Valid");
+                return false;
+            }
         }
-        return "** invalid **";
+        //System.out.println("Invalid");
+        return true;
     }
-
 }
-
 
 /** Hand class
  * Has cards (Stored in private instance variable myCards, an array of Cards
@@ -264,7 +301,6 @@ class Deck
         this.numPacks = 1;
         cards = new Card[numPacks * 52];
         init(numPacks);
-
     }
 
     /**
@@ -276,13 +312,11 @@ class Deck
         int cardIndex = 0;
 
         for (int initPacks = 0; initPacks < numPacks; initPacks++)
-        {
             for (int mpIndex = 0; mpIndex < 52; mpIndex++)
             {
                 cards[cardIndex] = masterPack[mpIndex];
                 cardIndex++;
             }
-        }
         topCard = cards.length - 1;
     }
 
@@ -292,7 +326,13 @@ class Deck
      */
     private static void allocateMasterPack()
     {
-        if (masterPack == null)
+        if (masterPack != null)
+        {
+            // Debug statement
+            System.out.println("masterPack already exists.");
+            return;
+        }
+        else
         {
             // Allocate and initialize array of Card objects
             // Variable to track Card object position in masterPack
@@ -300,7 +340,7 @@ class Deck
             int cardIndex = 0;
 
             // Initialize arrays of Card suits and values
-            char[] values = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+            char values [] = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
                     'Q', 'K', 'A'};
             Card.Suit [] suits = {Card.Suit.clubs, Card.Suit.diamonds,
                     Card.Suit.hearts, Card.Suit.spades};
@@ -320,13 +360,22 @@ class Deck
      */
     public void shuffle()
     {
-        Card temp = new Card();
-        for(int index = 0; index < cards.length; index++)
+        Card temp;
+
+        // Number of swaps done in Card array
+        int swaps = 8;
+
+        for (int i = 0; i < swaps; i++)
         {
-            int randomIndex = (int) (Math.random() * 51);
-            temp = cards[index];
-            cards[index] = cards[randomIndex];
-            cards[randomIndex] = temp;
+            // Create two random index values within bounds of array for swapping
+            int tempIndex1 = (int)(Math.random() * 51);
+            int tempIndex2 = (int)(Math.random() * 51);
+
+            // Set cards at index values
+            temp = cards[tempIndex1];
+            cards[tempIndex1] = cards[tempIndex2];
+            cards[tempIndex2] = temp;
+
         }
     }
 
@@ -385,13 +434,12 @@ class Deck
 
         for (int i = 0; i < cards.length; i++)
         {
-            decksb.append(cards[i]);
+            decksb.append(cards[i] + " " + "\n");
             cardTotal++;
         }
 
-        System.out.print("Number of cards: " + cardTotal);
+        System.out.print("Number of cards: " + cardTotal + "\n");
         deckString = decksb.toString();
         return deckString;
-
     }
 }
