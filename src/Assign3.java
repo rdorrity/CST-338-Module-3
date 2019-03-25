@@ -241,7 +241,10 @@ class Hand
     // return and remove the Card last entered into the Hand
     public Card playCard()
     {
-        return myCards[numCards--];
+        Card result = new Card(myCards[numCards -1].getValue(), myCards[numCards -1].getSuit());
+        myCards[numCards - 1] = null;
+        numCards--;
+        return result;
     }
 
 
