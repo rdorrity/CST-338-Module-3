@@ -35,6 +35,16 @@ public class Assign3
         System.out.println("Shuffled test deck:\n");
         System.out.print(testDeck.toString());
 
+        // just a test of Hand taking and playing a card
+        Hand h = new Hand();
+        for(int i=0; i<5; i++)
+        {
+            h.takeCard(testDeck.dealCard());
+            System.out.println("Playing card: " + h.playCard());
+        }
+
+
+
     }
 }
 /**
@@ -329,13 +339,7 @@ class Deck
      */
     private static void allocateMasterPack()
     {
-        if (masterPack != null)
-        {
-            // Debug statement
-            System.out.println("masterPack already exists.");
-            return;
-        }
-        else
+        if(masterPack == null)
         {
             // Allocate and initialize array of Card objects
             // Variable to track Card object position in masterPack
@@ -363,22 +367,13 @@ class Deck
      */
     public void shuffle()
     {
-        Card temp;
-
-        // Number of swaps done in Card array
-        int swaps = 8;
-
-        for (int i = 0; i < swaps; i++)
+        Card temp = new Card();
+        for(int index = 0; index < cards.length; index++)
         {
-            // Create two random index values within bounds of array for swapping
-            int tempIndex1 = (int)(Math.random() * 51);
-            int tempIndex2 = (int)(Math.random() * 51);
-
-            // Set cards at index values
-            temp = cards[tempIndex1];
-            cards[tempIndex1] = cards[tempIndex2];
-            cards[tempIndex2] = temp;
-
+            int randomIndex = (int) (Math.random() * 51);
+            temp = cards[index];
+            cards[index] = cards[randomIndex];
+            cards[randomIndex] = temp;
         }
     }
 
