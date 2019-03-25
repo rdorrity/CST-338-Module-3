@@ -22,10 +22,24 @@ public class Assign3
         System.out.println(testC.toString());
         testA.set('0', Card.Suit.hearts);
         System.out.println(testA.toString());
+
+        // Print out test Deck object
+       System.out.print("\n");
+       System.out.println("Test deck 1:\n");
+       Deck testDeck = new Deck();
+       System.out.print(testDeck.toString());
+
+       //Shuffle deck, reprint
+       testDeck.shuffle();
+       System.out.print("\n");
+       System.out.println("Shuffled testDeck:\n");
+       System.out.print(testDeck.toString());
+
     }
 }
 /**
- *
+ * Card class
+ * Defines Card objects, which have a suit and value.
  * @author Ryan Dorrity, Cody Young, Sara Kazemi, Nathan Warren-Acord
  * @version 03/20/2019
  */
@@ -273,7 +287,7 @@ class Deck
     */
    public Deck()
    {
-      new Deck();
+      new Deck(1);
    }
 
    /**
@@ -286,8 +300,7 @@ class Deck
       allocateMasterPack();
       this.numPacks = 1;
       init(numPacks);
-      cards = new Card[MAX_CARDS];
-      this.topCard = cards.length - 1;
+      cards = new Card[numPacks * 52];
    }
 
    /**
@@ -296,6 +309,7 @@ class Deck
     */
    public void init(int numPacks)
    {
+      topCard = cards.length - 1;
       int cardIndex = 0;
 
       for (int initPacks = 0; initPacks < numPacks; initPacks++)
@@ -331,12 +345,11 @@ class Deck
          Card.Suit [] suits = {Card.Suit.clubs, Card.Suit.diamonds,
                  Card.Suit.hearts, Card.Suit.spades};
 
-         for (int suitIndex = 0; suitIndex <= suits.length; suitIndex++)
+         for (Card.Suit suit : suits)
 
-            for (int valueIndex = 0; valueIndex <= values.length; valueIndex++)
+            for (char value : values)
             {
-               masterPack[cardIndex] = new Card(values[valueIndex],
-                       suits[suitIndex]);
+               masterPack[cardIndex] = new Card(value, suit);
                cardIndex++;
             }
       }
@@ -405,5 +418,29 @@ class Deck
          return cards[i];
       }
       return new Card('E', Card.Suit.diamonds);
+   }
+
+   /**
+    * Prints out Card objects stored in Deck object.
+    * @return Contents of Deck object (Card objects)
+    */
+   @Override
+   public String toString()
+   {
+      StringBuilder decksb = new StringBuilder();
+      String deckString;
+      // Debug only
+      int cardTotal = 0;
+
+      for (int i = 0; i <= cards.length; i++)
+      {
+         decksb.append(cards[i]);
+         cardTotal++;
+      }
+
+      System.out.print("Number of cards: " + cardTotal);
+      deckString = decksb.toString();
+      return deckString;
+
    }
 }
