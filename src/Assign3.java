@@ -23,16 +23,16 @@ public class Assign3
         testA.set('0', Card.Suit.hearts);
         System.out.println(testA.toString());
 
-        // Print out test Deck object
+       // Create test deck, print out contents
        System.out.print("\n");
        System.out.println("Test deck 1:\n");
        Deck testDeck = new Deck();
        System.out.print(testDeck.toString());
 
-       //Shuffle deck, reprint
-      // testDeck.shuffle();
+       // Shuffle deck, reprint
+       testDeck.shuffle();
        System.out.print("\n");
-       System.out.println("Shuffled testDeck:\n");
+       System.out.println("Shuffled test deck:\n");
        System.out.print(testDeck.toString());
 
     }
@@ -61,7 +61,7 @@ class Card
         value = 'A';
         suit = Suit.spades;
         errorFlag = isValid('A', Suit.spades);
-        System.out.println(toString());
+        //System.out.println(toString());
     }
 
     /**
@@ -72,7 +72,7 @@ class Card
     public Card(char value, Suit suit)
     {
         errorFlag = set(value, suit);
-        System.out.println(toString());
+        //System.out.println(toString());
     }
 
     /**
@@ -299,8 +299,8 @@ class Deck
    {
       allocateMasterPack();
       this.numPacks = 1;
-      init(numPacks);
       cards = new Card[numPacks * 52];
+      init(numPacks);
    }
 
    /**
@@ -432,15 +432,14 @@ class Deck
       // Debug only
       int cardTotal = 0;
 
-      for (int i = 0; i <= cards.length; i++)
+      for (int i = 0; i < cards.length; i++)
       {
-         decksb.append(cards[i]);
+         decksb.append(cards[i] + " " + "\n");
          cardTotal++;
       }
 
-      System.out.print("Number of cards: " + cardTotal);
+      System.out.print("Number of cards: " + cardTotal + "\n");
       deckString = decksb.toString();
       return deckString;
-
    }
 }
