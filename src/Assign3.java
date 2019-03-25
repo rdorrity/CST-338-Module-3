@@ -30,7 +30,7 @@ public class Assign3
        System.out.print(testDeck.toString());
 
        //Shuffle deck, reprint
-       testDeck.shuffle();
+      // testDeck.shuffle();
        System.out.print("\n");
        System.out.println("Shuffled testDeck:\n");
        System.out.print(testDeck.toString());
@@ -97,7 +97,7 @@ class Card
     boolean set(char value, Suit suit)
     {
         errorFlag = isValid(value, suit);
-        if (errorFlag == false)
+        if (!errorFlag)
         {
             this.value = value;
             this.suit = suit;
@@ -287,7 +287,7 @@ class Deck
     */
    public Deck()
    {
-      new Deck(1);
+      this(1);
    }
 
    /**
@@ -309,7 +309,6 @@ class Deck
     */
    public void init(int numPacks)
    {
-      topCard = cards.length - 1;
       int cardIndex = 0;
 
       for (int initPacks = 0; initPacks < numPacks; initPacks++)
@@ -318,6 +317,7 @@ class Deck
             cards[cardIndex] = masterPack[mpIndex];
             cardIndex++;
          }
+      topCard = cards.length - 1;
    }
 
    /**
@@ -368,8 +368,8 @@ class Deck
       for (int i = 0; i < swaps; i++)
       {
          // Create two random index values within bounds of array for swapping
-         int tempIndex1 = (int)(Math.random() * 52);
-         int tempIndex2 = (int)(Math.random() * 52);
+         int tempIndex1 = (int)(Math.random() * 51);
+         int tempIndex2 = (int)(Math.random() * 51);
 
          // Set cards at index values
          temp = cards[tempIndex1];
