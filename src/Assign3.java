@@ -20,6 +20,7 @@ public class Assign3
          ************/
 
         // Print out test Card objects
+        System.out.println("Card object test:\n");
         Card testA = new Card();
         Card testB = new Card('2', Card.Suit.clubs);
         Card testC = new Card('0', Card.Suit.hearts);
