@@ -87,24 +87,39 @@ public class Assign3
         }
 
         // Shuffle deck, reprint
-        testDeck.init(2);
-        testDeck.shuffle();
-        System.out.print("\n");
+        testDeck.init(2); // re=initalize
+        testDeck.shuffle(); // shuffle
+        System.out.println();
         System.out.println("Shuffled test deck:\n");
-        System.out.print(testDeck);
-
-        // Create Hand object, take Card object and verify correct Card is in
-        //  Hand
-        System.out.println("\nHand test\n");
-        Hand h1 = new Hand();
-        System.out.println("Hand created.");
-        for (int i = 0; i < 5; i++)
+        for(int index = 0; index < 104; index++)
         {
-            h.takeCard(testDeck.dealCard());
-            System.out.println("Playing card: " + h.playCard());
+            System.out.println("Dealing: "+ testDeck.dealCard());
         }
 
-        System.out.print('\n');
+        // Single pack test
+        Deck myDeck2 = new Deck(1);
+        System.out.println("\n\n\n**********DEAL UNSHUFFLED");
+        for(int index = 0; index < 52; index++)
+        {
+            System.out.println("Dealing: "+ myDeck2.dealCard());
+        }
+
+
+        System.out.println(" Test invalid k: " + myDeck2.inspectCard(999));
+
+        myDeck2.init(1);
+        myDeck2.shuffle();
+        System.out.println("\n\n\n**********SHUFFLING!!!!");
+        for(int index = 0; index < 52; index++)
+        {
+            System.out.println("Dealing: "+ myDeck2.dealCard());
+        }
+
+        System.out.println("~END PHASE 3 TEST~\n\n");
+        // END TEST PHASE 3
+
+        // PHASE 4 TEST
+        System.out.println("~PHASE 4 TEST~");
         Scanner userInput = new Scanner(System.in);
 
         int playerCount = 0;
@@ -526,7 +541,7 @@ class Deck
     /**
      * Getter for individual Card object. Returns a Card with errorFlag = true
      * if int i is invalid.
-     * @param i
+     * @param k
      * @return Individual invalid Card object
      */
     public Card inspectCard(int k)
