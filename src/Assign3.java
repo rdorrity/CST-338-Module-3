@@ -1,5 +1,5 @@
 /**
- * Module 3 - Cards
+ * Module 3 - Deck of Cards
  * Simulates a deck of cards, player hands, and basic card operations such
  * as shuffling and dealing.
  * Cannot build a house of cards. The authors apologize for this lack of
@@ -508,3 +508,282 @@ class Deck
         return deckString;
     }
 }
+
+/* TEST PHASE 1
+ * Test run #1
+ * K of diamonds
+ * ** invalid **
+ * A of spades
+ */
+
+/*
+TEST PHASE 2
+Test run:
+Hand full!
+After deal:
+Hand = ( Q of clubs, A of spades, K of diamonds, Q of clubs,
+A of spades, K of diamonds, Q of clubs, A of spades, K of diamonds,
+Q of clubs, A of spades, K of diamonds, Q of clubs, A of spades,
+K of diamonds, Q of clubs, A of spades, K of diamonds, Q of clubs,
+A of spades, K of diamonds, Q of clubs, A of spades, K of diamonds,
+Q of clubs, A of spades, K of diamonds, Q of clubs, A of spades,
+K of diamonds, Q of clubs, A of spades, K of diamonds, Q of clubs,
+A of spades, K of diamonds, Q of clubs, A of spades, K of diamonds,
+Q of clubs, A of spades, K of diamonds, Q of clubs, A of spades,
+K of diamonds, Q of clubs, A of spades, K of diamonds, Q of clubs,
+A of spades )
+Testing inspectCard()
+** invalid **
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+Playing K of diamonds
+Playing Q of clubs
+Playing A of spades
+*/
+
+/* TEST PHASE 3
+Test run:
+
+**********DEAL UNSHUFFLED
+Dealing: 2 of spades
+Dealing: 3 of spades
+Dealing: 4 of spades
+Dealing: 5 of spades
+Dealing: 6 of spades
+Dealing: 7 of spades
+Dealing: 8 of spades
+Dealing: 9 of spades
+Dealing: T of spades
+Dealing: J of spades
+Dealing: Q of spades
+Dealing: K of spades
+Dealing: A of spades
+Dealing: 2 of hearts
+Dealing: 3 of hearts
+Dealing: 4 of hearts
+Dealing: 5 of hearts
+Dealing: 6 of hearts
+Dealing: 7 of hearts
+Dealing: 8 of hearts
+Dealing: 9 of hearts
+Dealing: T of hearts
+Dealing: J of hearts
+Dealing: Q of hearts
+Dealing: K of hearts
+Dealing: A of hearts
+Dealing: 2 of diamonds
+Dealing: 3 of diamonds
+Dealing: 4 of diamonds
+Dealing: 5 of diamonds
+Dealing: 6 of diamonds
+Dealing: 7 of diamonds
+Dealing: 8 of diamonds
+Dealing: 9 of diamonds
+Dealing: T of diamonds
+Dealing: J of diamonds
+Dealing: Q of diamonds
+Dealing: K of diamonds
+Dealing: A of diamonds
+Dealing: 2 of clubs
+Dealing: 3 of clubs
+Dealing: 4 of clubs
+Dealing: 5 of clubs
+Dealing: 6 of clubs
+Dealing: 7 of clubs
+Dealing: 8 of clubs
+Dealing: 9 of clubs
+Dealing: T of clubs
+Dealing: J of clubs
+Dealing: Q of clubs
+Dealing: K of clubs
+Dealing: A of clubs
+Dealing: 2 of spades
+Dealing: 3 of spades
+Dealing: 4 of spades
+Dealing: 5 of spades
+Dealing: 6 of spades
+Dealing: 7 of spades
+Dealing: 8 of spades
+Dealing: 9 of spades
+Dealing: T of spades
+Dealing: J of spades
+Dealing: Q of spades
+Dealing: K of spades
+Dealing: A of spades
+Dealing: 2 of hearts
+Dealing: 3 of hearts
+Dealing: 4 of hearts
+Dealing: 5 of hearts
+Dealing: 6 of hearts
+Dealing: 7 of hearts
+Dealing: 8 of hearts
+Dealing: 9 of hearts
+Dealing: T of hearts
+Dealing: J of hearts
+Dealing: Q of hearts
+Dealing: K of hearts
+Dealing: A of hearts
+Dealing: 2 of diamonds
+Dealing: 3 of diamonds
+Dealing: 4 of diamonds
+Dealing: 5 of diamonds
+Dealing: 6 of diamonds
+Dealing: 7 of diamonds
+Dealing: 8 of diamonds
+Dealing: 9 of diamonds
+Dealing: T of diamonds
+Dealing: J of diamonds
+Dealing: Q of diamonds
+Dealing: K of diamonds
+Dealing: A of diamonds
+Dealing: 2 of clubs
+Dealing: 3 of clubs
+Dealing: 4 of clubs
+Dealing: 5 of clubs
+Dealing: 6 of clubs
+Dealing: 7 of clubs
+Dealing: 8 of clubs
+Dealing: 9 of clubs
+Dealing: T of clubs
+Dealing: J of clubs
+Dealing: Q of clubs
+Dealing: K of clubs
+Dealing: A of clubs
+ Test invalid k: ** invalid **
+
+**********SHUFFLING!!!!
+Deck = ( T of hearts, Q of clubs, 7 of spades, 9 of hearts,
+K of spades, 5 of diamonds, K of spades, 8 of hearts, 8 of clubs,
+A of hearts, 4 of hearts, 4 of clubs, 4 of spades, A of spades,
+7 of spades, J of spades, T of hearts, 3 of hearts, Q of spades,
+T of clubs, Q of spades, K of hearts, K of clubs, 3 of spades,
+J of hearts, A of clubs, T of spades, 7 of clubs, Q of hearts,
+6 of spades, A of clubs, 5 of spades, T of spades, 7 of hearts,
+A of hearts, K of diamonds, 8 of diamonds, 7 of hearts, 9 of hearts,
+2 of spades, 2 of diamonds, 5 of clubs, 6 of hearts, T of diamonds,
+7 of clubs, 5 of hearts, 3 of diamonds, 8 of diamonds, Q of diamonds,
+3 of hearts, 2 of hearts, 9 of spades, 5 of diamonds, J of spades,
+6 of spades, 6 of diamonds, 4 of clubs, Q of clubs, 2 of spades,
+J of clubs, 9 of diamonds, Q of diamonds, 2 of clubs, K of clubs,
+T of diamonds, 7 of diamonds, 4 of diamonds, A of diamonds, 8 of spades,
+4 of hearts, A of diamonds, J of diamonds, J of clubs, A of spades,
+8 of clubs, 3 of clubs, Q of hearts, T of clubs, 5 of spades,
+J of diamonds, 3 of spades, 6 of clubs, 2 of hearts, 5 of clubs,
+3 of diamonds, 6 of hearts, 4 of spades, 9 of diamonds, K of diamonds,
+3 of clubs, 4 of diamonds, 9 of clubs, 9 of clubs, 2 of diamonds,
+7 of diamonds, 8 of hearts, 2 of clubs, 6 of diamonds, J of hearts,
+6 of clubs, K of hearts, 5 of hearts, 8 of spades, 9 of spades )
+
+**********DEAL UNSHUFFLED
+Dealing: 2 of spades
+Dealing: 3 of spades
+Dealing: 4 of spades
+Dealing: 5 of spades
+Dealing: 6 of spades
+Dealing: 7 of spades
+Dealing: 8 of spades
+Dealing: 9 of spades
+Dealing: T of spades
+Dealing: J of spades
+Dealing: Q of spades
+Dealing: K of spades
+Dealing: A of spades
+Dealing: 2 of hearts
+Dealing: 3 of hearts
+Dealing: 4 of hearts
+Dealing: 5 of hearts
+Dealing: 6 of hearts
+Dealing: 7 of hearts
+Dealing: 8 of hearts
+Dealing: 9 of hearts
+Dealing: T of hearts
+Dealing: J of hearts
+Dealing: Q of hearts
+Dealing: K of hearts
+Dealing: A of hearts
+Dealing: 2 of diamonds
+Dealing: 3 of diamonds
+Dealing: 4 of diamonds
+Dealing: 5 of diamonds
+Dealing: 6 of diamonds
+Dealing: 7 of diamonds
+Dealing: 8 of diamonds
+Dealing: 9 of diamonds
+Dealing: T of diamonds
+Dealing: J of diamonds
+Dealing: Q of diamonds
+Dealing: K of diamonds
+Dealing: A of diamonds
+Dealing: 2 of clubs
+Dealing: 3 of clubs
+Dealing: 4 of clubs
+Dealing: 5 of clubs
+Dealing: 6 of clubs
+Dealing: 7 of clubs
+Dealing: 8 of clubs
+Dealing: 9 of clubs
+Dealing: T of clubs
+Dealing: J of clubs
+Dealing: Q of clubs
+Dealing: K of clubs
+Dealing: A of clubs
+ Test invalid k: ** invalid **
+
+**********SHUFFLING!!!!
+Deck = ( 7 of hearts, 2 of hearts, 5 of spades, A of diamonds,
+A of hearts, K of diamonds, T of diamonds, A of spades, 9 of clubs,
+Q of clubs, 3 of diamonds, 9 of diamonds, K of clubs, 4 of diamonds,
+J of clubs, 3 of spades, 7 of clubs, 3 of hearts, 2 of diamonds,
+6 of hearts, 2 of spades, 9 of spades, J of spades, 8 of diamonds,
+7 of diamonds, 6 of spades, T of hearts, 6 of diamonds, Q of hearts,
+T of spades, J of diamonds, 4 of spades, Q of diamonds, 6 of clubs,
+Q of spades, 2 of clubs, K of hearts, 5 of clubs, 5 of hearts,
+8 of hearts, J of hearts, 4 of hearts, 5 of diamonds, 7 of spades,
+9 of hearts, K of spades, A of clubs, T of clubs, 4 of clubs,
+3 of clubs, 8 of spades, 8 of club )
+ */
