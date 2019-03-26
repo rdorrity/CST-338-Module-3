@@ -76,12 +76,15 @@ public class Assign3
 
         // PHASE 3
         System.out.println("~PHASE 3 TEST~");
+
         // Create double pack deck and deal
         System.out.print("\n");
         System.out.println("Test double pack deck:\n");
         Deck testDeck = new Deck(2);
+
         System.out.println("**********DEAL UNSHUFFLED");
-        for(int index = 0; index < 104; index++)
+        int limit = testDeck.getTopCard() + 1; // length of testDeck
+        for(int index = 0; index < limit; index++)
         {
             System.out.println("Dealing: "+ testDeck.dealCard());
         }
@@ -90,8 +93,9 @@ public class Assign3
         testDeck.init(2); // re=initalize
         testDeck.shuffle(); // shuffle
         System.out.println();
+
         System.out.println("Shuffled test deck:\n");
-        for(int index = 0; index < 104; index++)
+        for(int index = 0; index < limit; index++)
         {
             System.out.println("Dealing: "+ testDeck.dealCard());
         }
@@ -99,7 +103,8 @@ public class Assign3
         // Single pack test
         Deck myDeck2 = new Deck(1);
         System.out.println("\n\n\n**********DEAL UNSHUFFLED");
-        for(int index = 0; index < 52; index++)
+        limit = myDeck2.getTopCard() + 1; // length of myDeck2
+        for(int index = 0; index < limit; index++)
         {
             System.out.println("Dealing: "+ myDeck2.dealCard());
         }
@@ -110,7 +115,7 @@ public class Assign3
         myDeck2.init(1);
         myDeck2.shuffle();
         System.out.println("\n\n\n**********SHUFFLING!!!!");
-        for(int index = 0; index < 52; index++)
+        for(int index = 0; index < limit; index++)
         {
             System.out.println("Dealing: "+ myDeck2.dealCard());
         }
@@ -122,8 +127,8 @@ public class Assign3
         System.out.println("~PHASE 4 TEST~");
         Scanner userInput = new Scanner(System.in);
 
+        // Cannot have fewer than 1 or greater than 10 players
         int playerCount = 0;
-
         while (playerCount < 1 || playerCount > 10)
         {
             System.out.println("Please select the number of players (1 - 10):");
@@ -132,17 +137,17 @@ public class Assign3
 
 
         Deck deck = new Deck();
-        int deckSize = 52;
-        Hand[] players = new Hand[playerCount];
+        int deckSize = deck.getTopCard() + 1; // length of deck
+        Hand[] players = new Hand[playerCount]; // create array of hands
 
         for (int i = 0; i < players.length; i++)
         {
-            players[i] = new Hand();
+            players[i] = new Hand(); // initialize Hands and store in array
         }
 
         for (int i = 0; i < deckSize; i++)
         {
-            players[i % playerCount].takeCard(deck.dealCard());
+            players[i % playerCount].takeCard(deck.dealCard()); // populate hands
         }
 
 
@@ -150,9 +155,14 @@ public class Assign3
         System.out.println("Printing hands from an unshuffled deck:\n");
         for (int i = 0; i < players.length; i++)
         {
-            System.out.println("Player " + (i + 1) + " hand :\n" +
-                    (players[i] + ")\n"));
+            System.out.print("Player " + (i+1) + " hand : ( \n");
+            while(players[i].getNumCards() > 0)
+            {
+                System.out.println(players[i].playCard());
+            }
+            System.out.println(" \t\t\t)\n");
         }
+
 
         // RESET EVERYTHING
         System.out.println("RESETTING");
@@ -162,23 +172,27 @@ public class Assign3
         {
             players[index].resetHand(); // reset hand
         }
+        //- END RESET
 
+        // Shuffle and deal
         deck.shuffle();
-
         for (int i = 0; i < deckSize; i++)
         {
             players[i % playerCount].takeCard(deck.dealCard());
         }
-        //- END RESET
 
-        // Shuffled deck
         System.out.println("Printing hands from a shuffled deck:");
 
         for (int i = 0; i < players.length; i++)
         {
-            System.out.println("Player " + (i+1) + " hand :\n" +
-                    (players[i] + ")\n"));
+            System.out.print("Player " + (i+1) + " hand : ( \n");
+            while(players[i].getNumCards() > 0)
+            {
+                System.out.println(players[i].playCard());
+            }
+            System.out.println(" \t\t\t)\n");
         }
+
 
         System.out.println("~END TEST PHASE 4~");
         //END PHASE 4 TEST
@@ -368,6 +382,7 @@ class Hand
     // Represents removing all cards from Hand
     public void resetHand()
     {
+        numCards = 0;
         for (int index = 0; index < myCards.length; index++)
         {
             myCards[index] = null;
