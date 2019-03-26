@@ -547,7 +547,7 @@ class Deck
     /**
      * Getter for individual Card object. Returns a Card with errorFlag = true
      * if int i is invalid.
-     * @param i
+     * @param k
      * @return Individual invalid Card object
      */
     public Card inspectCard(int k)
