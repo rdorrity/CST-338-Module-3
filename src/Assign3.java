@@ -20,10 +20,11 @@ public class Assign3
          * Unit Tests
          ************/
 
+       Card testB = new Card('2', Card.Suit.clubs);
         // Print out test Card objects
         Card testA = new Card();
-        Card testB = new Card('2', Card.Suit.clubs);
         Card testC = new Card('0', Card.Suit.hearts);
+
 
         testC.set('3', Card.Suit.diamonds);
         System.out.println(testC.toString());
@@ -94,7 +95,7 @@ public class Assign3
        for (Hand hand : players) {
           System.out.println("Hand = (" + hand.toString() + ")\n");
        }
-
+       System.out.println(testEqual);
     }
 }
 /**
@@ -202,7 +203,12 @@ class Card
      */
     public boolean equals(Card card)
     {
-        return false;
+        if  (this.value == card.value && this.suit == card.suit)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     /**
