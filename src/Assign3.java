@@ -525,10 +525,15 @@ class Deck
 }
 
 /* TEST PHASE 1 - Card class
- * Test run #1
- * K of diamonds
- * ** invalid **
- * A of spades
+Card object test:
+
+A of spades
+2 of clubs
+Invalid
+
+Testing set()
+Invalid
+A of hearts
  */
 
 //-------------------------------
