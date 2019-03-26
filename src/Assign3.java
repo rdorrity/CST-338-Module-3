@@ -20,9 +20,9 @@ public class Assign3
          * Unit Tests
          ************/
 
-       Card testB = new Card('2', Card.Suit.clubs);
         // Print out test Card objects
         Card testA = new Card();
+        Card testB = new Card('2', Card.Suit.clubs);
         Card testC = new Card('0', Card.Suit.hearts);
 
 
@@ -95,7 +95,6 @@ public class Assign3
        for (Hand hand : players) {
           System.out.println("Hand = (" + hand.toString() + ")\n");
        }
-       System.out.println(testEqual);
     }
 }
 /**
