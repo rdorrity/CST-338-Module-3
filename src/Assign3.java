@@ -24,6 +24,7 @@ public class Assign3
         Card testB = new Card('2', Card.Suit.clubs);
         Card testC = new Card('0', Card.Suit.hearts);
 
+
         testC.set('3', Card.Suit.diamonds);
         System.out.println(testC);
 
@@ -106,7 +107,6 @@ public class Assign3
           System.out.println("Player " + playerNumbers[i] + " hand :\n" +
                   (players[i].toString() + ")\n"));
        }
-
     }
 }
 /**
@@ -214,7 +214,12 @@ class Card
      */
     public boolean equals(Card card)
     {
-        return false;
+        if  (this.value == card.value && this.suit == card.suit)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     /**
