@@ -8,18 +8,27 @@
  * @version 03/20/2019
  */
 
+import java.util.*;
+
 public class Assign3
 {
+   public static final int numDecks = 1;
+
     public static void main(String[] args)
     {
+        /************
+         * Unit Tests
+         ************/
+
+        // Print out test Card objects
         Card testA = new Card();
-        //System.out.println(testA.toString());
         Card testB = new Card('2', Card.Suit.clubs);
-        //System.out.println(testB.toString());
         Card testC = new Card('0', Card.Suit.hearts);
-        //System.out.println(testC.toString());
+
         testC.set('3', Card.Suit.diamonds);
         System.out.println(testC.toString());
+
+        // Invalid card object
         testA.set('0', Card.Suit.hearts);
         System.out.println(testA.toString());
 
@@ -35,15 +44,56 @@ public class Assign3
         System.out.println("Shuffled test deck:\n");
         System.out.print(testDeck.toString());
 
-        // just a test of Hand taking and playing a card
+        // Create Hand object, take Card object and verify correct Card is in
+       //  Hand
+        System.out.println("\nHand test\n");
         Hand h = new Hand();
+        System.out.println("Hand created.");
         for(int i=0; i<5; i++)
         {
             h.takeCard(testDeck.dealCard());
             System.out.println("Playing card: " + h.playCard());
         }
 
+       System.out.print('\n');
+       Scanner userInput = new Scanner(System.in);
+       int playerCount = 0;
+       while(playerCount < 1 || playerCount > 10) {
+          System.out.println("Please select the number of players (1 - 10):");
+          playerCount = userInput.nextInt();
+       }
 
+       Deck deck = new Deck();
+       int deckSize = numDecks * 52;
+       Hand[] players = new Hand[playerCount];
+
+       for (int i = 0; i < players.length; i++) {
+          players[i] = new Hand();
+       }
+
+       for (int i = 0; i < deckSize; i++) {
+          players[i % playerCount].takeCard(deck.dealCard());
+       }
+
+       System.out.println("Printing hands from an unshuffled deck:");
+
+       for (Hand hand : players) {
+          System.out.println("Hand = (" + hand.toString() + ")\n");
+          hand.resetHand();
+       }
+
+       deck.init(numDecks);
+       deck.shuffle();
+
+       for (int i = 0; i < deckSize; i++) {
+          players[i % playerCount].takeCard(deck.dealCard());
+       }
+
+       System.out.println("Printing hands from a shuffled deck:");
+
+       for (Hand hand : players) {
+          System.out.println("Hand = (" + hand.toString() + ")\n");
+       }
 
     }
 }
