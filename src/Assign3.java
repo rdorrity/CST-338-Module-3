@@ -151,7 +151,6 @@ class Card
         value = 'A';
         suit = Suit.spades;
         errorFlag = isValid('A', Suit.spades);
-        //System.out.println(toString());
     }
 
     /**
@@ -162,7 +161,6 @@ class Card
     public Card(char value, Suit suit)
     {
         errorFlag = set(value, suit);
-        //System.out.println(toString());
     }
 
     /**
@@ -375,7 +373,6 @@ class Deck
     private static Card[] masterPack;
     private Card[] cards;
     private int topCard;
-    private int numPacks;
 
     /**
      * Default constructor for Deck objects.
@@ -393,7 +390,6 @@ class Deck
     public Deck(int numPacks)
     {
         allocateMasterPack();
-        this.numPacks = 1;
         cards = new Card[numPacks * 52];
         init(numPacks);
     }
