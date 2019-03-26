@@ -24,15 +24,21 @@ public class Assign3
         System.out.println("Card object test:\n");
         Card testA = new Card();
         Card testB = new Card('2', Card.Suit.clubs);
-        Card testC = new Card('0', Card.Suit.hearts);
-
-
-        testC.set('3', Card.Suit.diamonds);
+        Card testC = new Card('X', Card.Suit.hearts);
+        System.out.println(testA);
+        System.out.println(testB);
         System.out.println(testC);
 
-        // Invalid card object
-        testA.set('0', Card.Suit.hearts);
-        System.out.println(testA);
+        System.out.println("\nTesting set()");
+
+
+        // set valid card to invalid card object
+        testA.set('X', Card.Suit.diamonds);
+        System.out.println(testC);
+
+        // set valid card to invalid card object
+        testC.set('A', Card.Suit.hearts);
+        System.out.println(testC);
 
         // Create test deck, print out contents
         System.out.print("\n");
