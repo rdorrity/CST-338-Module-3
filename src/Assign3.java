@@ -2,9 +2,10 @@
  * Module 3 - Cards
  * Simulates a deck of cards, player hands, and basic card operations such
  * as shuffling and dealing.
- * Cannot build a house of cards. We apologize for this lack of
+ * Cannot build a house of cards. The authors apologize for this lack of
  * advanced functionality.
- * @author Ryan Dorrity, Cody Young, Sara Kazemi, Nathan Warren-Acord
+ * @author Ryan Dorrity, Cody Young, Sara Kazemi, Nathan Warren-Acord - SCSI
+ * Logic
  * @version 03/20/2019
  */
 
@@ -12,8 +13,6 @@ import java.util.*;
 
 public class Assign3
 {
-   public static final int numDecks = 1;
-
     public static void main(String[] args)
     {
         /************
@@ -26,23 +25,23 @@ public class Assign3
         Card testC = new Card('0', Card.Suit.hearts);
 
         testC.set('3', Card.Suit.diamonds);
-        System.out.println(testC.toString());
+        System.out.println(testC);
 
         // Invalid card object
         testA.set('0', Card.Suit.hearts);
-        System.out.println(testA.toString());
+        System.out.println(testA);
 
         // Create test deck, print out contents
         System.out.print("\n");
         System.out.println("Test deck 1:\n");
         Deck testDeck = new Deck();
-        System.out.print(testDeck.toString());
+        System.out.print(testDeck);
 
         // Shuffle deck, reprint
         testDeck.shuffle();
         System.out.print("\n");
         System.out.println("Shuffled test deck:\n");
-        System.out.print(testDeck.toString());
+        System.out.print(testDeck);
 
         // Create Hand object, take Card object and verify correct Card is in
        //  Hand
@@ -57,14 +56,18 @@ public class Assign3
 
        System.out.print('\n');
        Scanner userInput = new Scanner(System.in);
+
        int playerCount = 0;
+
        while(playerCount < 1 || playerCount > 10) {
           System.out.println("Please select the number of players (1 - 10):");
           playerCount = userInput.nextInt();
        }
 
+       int[] playerNumbers = new int[playerCount];
+
        Deck deck = new Deck();
-       int deckSize = numDecks * 52;
+       int deckSize = 52;
        Hand[] players = new Hand[playerCount];
 
        for (int i = 0; i < players.length; i++) {
@@ -75,24 +78,33 @@ public class Assign3
           players[i % playerCount].takeCard(deck.dealCard());
        }
 
-       System.out.println("Printing hands from an unshuffled deck:");
-
-       for (Hand hand : players) {
-          System.out.println("Hand = (" + hand.toString() + ")\n");
-          hand.resetHand();
+       // Initialize playerNumbers array
+       for (int i = 0; i < playerCount; i++) {
+          playerNumbers[i] = i + 1;
        }
 
-       deck.init(numDecks);
+       // Unshuffled deck
+       System.out.println("Printing hands from an unshuffled deck:\n");
+       for (int i = 0; i < players.length; i++)
+       {
+          System.out.println("Player " + playerNumbers[i] + " hand :\n" +
+                  (players[i].toString() + ")\n"));
+       }
+
+       deck = new Deck();
        deck.shuffle();
 
        for (int i = 0; i < deckSize; i++) {
           players[i % playerCount].takeCard(deck.dealCard());
        }
 
+       // Shuffled deck
        System.out.println("Printing hands from a shuffled deck:");
 
-       for (Hand hand : players) {
-          System.out.println("Hand = (" + hand.toString() + ")\n");
+       for (int i = 0; i < players.length; i++)
+       {
+          System.out.println("Player " + playerNumbers[i] + " hand :\n" +
+                  (players[i].toString() + ")\n"));
        }
 
     }
@@ -311,7 +323,7 @@ class Hand
     @Override
     public String toString()
     {
-        String result = "Hand = ( ";
+        String result = "( ";
         for(int index = 0; index < myCards.length; index++)
         {
             if(myCards[index] != null)
