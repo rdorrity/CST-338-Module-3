@@ -64,7 +64,7 @@ public class Assign3
         System.out.println("After deal: ");
         System.out.println(h);
 
-        System.out.println("Testing inspectCard()");
+        System.out.println("\nTesting inspectCard()");
         System.out.println(h.inspectCard(99)); // illegal index
         for(int index = 0; index < h.myCards.length; index++)
         {
@@ -74,13 +74,20 @@ public class Assign3
         System.out.println("~END PHASE 2 TEST~\n\n");
         // END PHASE 2 TEST
 
-        // Create test deck, print out contents
+        // PHASE 3
+        System.out.println("~PHASE 3 TEST~");
+        // Create double pack deck and deal
         System.out.print("\n");
-        System.out.println("Test deck 1:\n");
-        Deck testDeck = new Deck();
-        System.out.print(testDeck);
+        System.out.println("Test double pack deck:\n");
+        Deck testDeck = new Deck(2);
+        System.out.println("**********DEAL UNSHUFFLED");
+        for(int index = 0; index < 104; index++)
+        {
+            System.out.println("Dealing: "+ testDeck.dealCard());
+        }
 
         // Shuffle deck, reprint
+        testDeck.init(2);
         testDeck.shuffle();
         System.out.print("\n");
         System.out.println("Shuffled test deck:\n");
@@ -434,6 +441,7 @@ class Deck
      */
     public void init(int numPacks)
     {
+        topCard = cards.length - 1;
         int cardIndex = 0;
 
         for (int initPacks = 0; initPacks < numPacks; initPacks++)
@@ -442,7 +450,7 @@ class Deck
                 cards[cardIndex] = masterPack[mpIndex];
                 cardIndex++;
             }
-        topCard = cards.length - 1;
+
     }
 
     /**
@@ -495,7 +503,7 @@ class Deck
      */
     public Card dealCard()
     {
-        Card dealtCard = cards[topCard];
+        Card dealtCard = new Card(inspectCard(topCard).getValue(), inspectCard(topCard).getSuit());
 
         if (topCard >= 0)
         {
@@ -521,13 +529,13 @@ class Deck
      * @param i
      * @return Individual invalid Card object
      */
-    public Card inspectCard(int i)
+    public Card inspectCard(int k)
     {
-        if (i < topCard)
+        if(k < cards.length)
         {
-            return cards[i];
+            return cards[k];
         }
-        return new Card('E', Card.Suit.diamonds);
+        return new Card('X', Card.Suit.diamonds); // invalid card
     }
 
     /**
