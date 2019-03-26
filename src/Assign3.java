@@ -20,7 +20,10 @@ public class Assign3
          * Unit Tests
          ************/
 
+        // PHASE 1
+
         // Print out test Card objects
+        System.out.println("~PHASE 1 TEST~");
         System.out.println("Card object test:\n");
         Card testA = new Card();
         Card testB = new Card('2', Card.Suit.clubs);
@@ -36,9 +39,40 @@ public class Assign3
         testA.set('X', Card.Suit.diamonds);
         System.out.println(testC);
 
-        // set valid card to invalid card object
+        // set Invalid card to valid card object
         testC.set('A', Card.Suit.hearts);
         System.out.println(testC);
+        System.out.println("~END PHASE 1 TEST~\n\n");
+
+        // END PHASE 1
+
+        // PHASE 2
+        System.out.println("~PHASE 2 TEST~");
+        Card c = new Card();
+        Hand h = new Hand();
+        for(int index = 0; index < h.myCards.length; index+=3)
+        {
+            h.takeCard(testC);
+            h.takeCard(testB);
+            h.takeCard(c);
+
+        }
+        if(!h.takeCard(testA))
+        {
+            System.out.println("Hand full!");
+        }
+        System.out.println("After deal: ");
+        System.out.println(h);
+
+        System.out.println("Testing inspectCard()");
+        System.out.println(h.inspectCard(99)); // illegal index
+        for(int index = 0; index < h.myCards.length; index++)
+        {
+            System.out.println("Playing " + h.inspectCard(index));
+        }
+
+        System.out.println("~END PHASE 2 TEST~\n\n");
+        // END PHASE 2 TEST
 
         // Create test deck, print out contents
         System.out.print("\n");
@@ -55,7 +89,7 @@ public class Assign3
         // Create Hand object, take Card object and verify correct Card is in
         //  Hand
         System.out.println("\nHand test\n");
-        Hand h = new Hand();
+        Hand h1 = new Hand();
         System.out.println("Hand created.");
         for (int i = 0; i < 5; i++)
         {
