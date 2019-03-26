@@ -4,6 +4,7 @@
  * as shuffling and dealing.
  * Cannot build a house of cards. The authors apologize for this lack of
  * advanced functionality.
+ *
  * @author Ryan Dorrity, Cody Young, Sara Kazemi, Nathan Warren-Acord - SCSI
  * Logic
  * @version 03/20/2019
@@ -46,70 +47,76 @@ public class Assign3
         System.out.print(testDeck);
 
         // Create Hand object, take Card object and verify correct Card is in
-       //  Hand
+        //  Hand
         System.out.println("\nHand test\n");
         Hand h = new Hand();
         System.out.println("Hand created.");
-        for(int i=0; i<5; i++)
+        for (int i = 0; i < 5; i++)
         {
             h.takeCard(testDeck.dealCard());
             System.out.println("Playing card: " + h.playCard());
         }
 
-       System.out.print('\n');
-       Scanner userInput = new Scanner(System.in);
+        System.out.print('\n');
+        Scanner userInput = new Scanner(System.in);
 
-       int playerCount = 0;
+        int playerCount = 0;
 
-       while(playerCount < 1 || playerCount > 10) {
-          System.out.println("Please select the number of players (1 - 10):");
-          playerCount = userInput.nextInt();
-       }
+        while (playerCount < 1 || playerCount > 10)
+        {
+            System.out.println("Please select the number of players (1 - 10):");
+            playerCount = userInput.nextInt();
+        }
 
-       int[] playerNumbers = new int[playerCount];
+        int[] playerNumbers = new int[playerCount];
 
-       Deck deck = new Deck();
-       int deckSize = 52;
-       Hand[] players = new Hand[playerCount];
+        Deck deck = new Deck();
+        int deckSize = 52;
+        Hand[] players = new Hand[playerCount];
 
-       for (int i = 0; i < players.length; i++) {
-          players[i] = new Hand();
-       }
+        for (int i = 0; i < players.length; i++)
+        {
+            players[i] = new Hand();
+        }
 
-       for (int i = 0; i < deckSize; i++) {
-          players[i % playerCount].takeCard(deck.dealCard());
-       }
+        for (int i = 0; i < deckSize; i++)
+        {
+            players[i % playerCount].takeCard(deck.dealCard());
+        }
 
-       // Initialize playerNumbers array
-       for (int i = 0; i < playerCount; i++) {
-          playerNumbers[i] = i + 1;
-       }
+        // Initialize playerNumbers array
+        for (int i = 0; i < playerCount; i++)
+        {
+            playerNumbers[i] = i + 1;
+        }
 
-       // Unshuffled deck
-       System.out.println("Printing hands from an unshuffled deck:\n");
-       for (int i = 0; i < players.length; i++)
-       {
-          System.out.println("Player " + playerNumbers[i] + " hand :\n" +
-                  (players[i].toString() + ")\n"));
-       }
+        // Unshuffled deck
+        System.out.println("Printing hands from an unshuffled deck:\n");
+        for (int i = 0; i < players.length; i++)
+        {
+            System.out.println("Player " + (i + 1) + " hand :\n" +
+                    (players[i].toString() + ")\n"));
+        }
 
-       deck = new Deck();
-       deck.shuffle();
+        deck = new Deck();
+        deck.shuffle();
 
-       for (int i = 0; i < deckSize; i++) {
-          players[i % playerCount].takeCard(deck.dealCard());
-       }
+        for (int i = 0; i < deckSize; i++)
+        {
+            players[i % playerCount].takeCard(deck.dealCard());
+        }
 
-       // Shuffled deck
-       System.out.println("Printing hands from a shuffled deck:");
+        // Shuffled deck
+        System.out.println("Printing hands from a shuffled deck:");
 
-       for (int i = 0; i < players.length; i++)
-       {
-          System.out.println("Player " + playerNumbers[i] + " hand :\n" +
-                  (players[i].toString() + ")\n"));
-       }
+        for (int i = 0; i < players.length; i++)
+        {
+            System.out.println("Player " + playerNumbers[i] + " hand :\n" +
+                    (players[i].toString() + ")\n"));
+        }
     }
 }
+
 /**
  * Card class
  * Defines Card objects, which have a suit and value.
@@ -118,9 +125,13 @@ public class Assign3
  */
 class Card
 {
-    private char[] cardRank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+    private char[] cardRank = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
             'Q', 'K'};
-    enum Suit {clubs, diamonds, hearts, spades}
+
+    enum Suit
+    {
+        clubs, diamonds, hearts, spades
+    }
 
     private Suit suit;
     private char value;
@@ -156,8 +167,7 @@ class Card
         if (errorFlag == true)
         {
             return "Invalid";
-        }
-        else
+        } else
             return value + " of " + suit;
     }
 
@@ -175,8 +185,7 @@ class Card
             this.value = value;
             this.suit = suit;
             return errorFlag;
-        }
-        else
+        } else
             this.suit = suit;
         return errorFlag;
     }
@@ -215,11 +224,10 @@ class Card
      */
     public boolean equals(Card card)
     {
-        if  (this.value == card.value && this.suit == card.suit)
+        if (this.value == card.value && this.suit == card.suit)
         {
             return true;
-        }
-        else
+        } else
             return false;
     }
 
@@ -282,7 +290,7 @@ class Hand
     // Returns Card at index k in myCards
     public Card inspectCard(int k)
     {
-        if(k < myCards.length)
+        if (k < myCards.length)
         {
             return myCards[k]; // return card if k is good
         }
@@ -294,7 +302,7 @@ class Hand
     // Represents removing all cards from Hand
     public void resetHand()
     {
-        for(int index = 0; index < myCards.length; index++)
+        for (int index = 0; index < myCards.length; index++)
         {
             myCards[index] = null;
         }
@@ -306,7 +314,7 @@ class Hand
     public boolean takeCard(Card card)
     {
 
-        if(numCards < MAX_CARDS)
+        if (numCards < MAX_CARDS)
         {
             myCards[numCards] = card;
             numCards++;
@@ -319,7 +327,7 @@ class Hand
     // return and remove the Card last entered into the Hand
     public Card playCard()
     {
-        Card result = new Card(myCards[numCards -1].getValue(), myCards[numCards -1].getSuit());
+        Card result = new Card(myCards[numCards - 1].getValue(), myCards[numCards - 1].getSuit());
         myCards[numCards - 1] = null;
         numCards--;
         return result;
@@ -330,9 +338,9 @@ class Hand
     public String toString()
     {
         String result = "( ";
-        for(int index = 0; index < myCards.length; index++)
+        for (int index = 0; index < myCards.length; index++)
         {
-            if(myCards[index] != null)
+            if (myCards[index] != null)
             {
                 result += myCards[index] + ", ";
                 if (index % 5 == 3)
@@ -342,7 +350,7 @@ class Hand
             }
 
         }
-        result = result.substring(0, result.length()-2) + " )";
+        result = result.substring(0, result.length() - 2) + " )";
         return result;
     }
 }
@@ -358,8 +366,8 @@ class Deck
     // Maximum number of 52 card decks
     public final int MAX_CARDS = 6 * 52;
     // Static array that holds 52 references to standard Card objects.
-    private static Card [] masterPack;
-    private Card [] cards;
+    private static Card[] masterPack;
+    private Card[] cards;
     private int topCard;
     private int numPacks;
 
@@ -407,7 +415,7 @@ class Deck
      */
     private static void allocateMasterPack()
     {
-        if(masterPack == null)
+        if (masterPack == null)
         {
             // Allocate and initialize array of Card objects
             // Variable to track Card object position in masterPack
@@ -415,9 +423,9 @@ class Deck
             int cardIndex = 0;
 
             // Initialize arrays of Card suits and values
-            char values [] = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
+            char values[] = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J',
                     'Q', 'K', 'A'};
-            Card.Suit [] suits = {Card.Suit.clubs, Card.Suit.diamonds,
+            Card.Suit[] suits = {Card.Suit.clubs, Card.Suit.diamonds,
                     Card.Suit.hearts, Card.Suit.spades};
 
             for (Card.Suit suit : suits)
@@ -436,7 +444,7 @@ class Deck
     public void shuffle()
     {
         Card temp = new Card();
-        for(int index = 0; index < cards.length; index++)
+        for (int index = 0; index < cards.length; index++)
         {
             int randomIndex = (int) (Math.random() * 51);
             temp = cards[index];
@@ -510,15 +518,17 @@ class Deck
     }
 }
 
-/* TEST PHASE 1
+/* TEST PHASE 1 - Card class
  * Test run #1
  * K of diamonds
  * ** invalid **
  * A of spades
  */
 
+//-------------------------------
+
 /*
-TEST PHASE 2
+TEST PHASE 2 - Hand Class
 Test run:
 Hand full!
 After deal:
@@ -587,9 +597,9 @@ Playing Q of clubs
 Playing A of spades
 */
 
-/* TEST PHASE 3
-Test run:
+//-------------------------------
 
+/* TEST PHASE 3 - Deck Class
 **********DEAL UNSHUFFLED
 Dealing: 2 of spades
 Dealing: 3 of spades
@@ -787,4 +797,73 @@ Q of spades, 2 of clubs, K of hearts, 5 of clubs, 5 of hearts,
 8 of hearts, J of hearts, 4 of hearts, 5 of diamonds, 7 of spades,
 9 of hearts, K of spades, A of clubs, T of clubs, 4 of clubs,
 3 of clubs, 8 of spades, 8 of club )
+ */
+
+
+/* PHASE 4 TEST RUN - Putting Everything Together!
+Please select the number of players (1 - 10):
+5
+Printing hands from an unshuffled deck:
+
+Player 1 hand :
+( A of spades, 9 of spades, 4 of spades, Q of hearts,
+7 of hearts, 2 of hearts, T of diamonds, 5 of diamonds, K of clubs,
+8 of clubs, 3 of clubs ))
+
+Player 2 hand :
+( K of spades, 8 of spades, 3 of spades, J of hearts,
+6 of hearts, A of diamonds, 9 of diamonds, 4 of diamonds, Q of clubs,
+7 of clubs, 2 of clubs ))
+
+Player 3 hand :
+( Q of spades, 7 of spades, 2 of spades, T of hearts,
+5 of hearts, K of diamonds, 8 of diamonds, 3 of diamonds, J of clubs,
+6 of clubs ))
+
+Player 4 hand :
+( J of spades, 6 of spades, A of hearts, 9 of hearts,
+4 of hearts, Q of diamonds, 7 of diamonds, 2 of diamonds, T of clubs,
+5 of clubs ))
+
+Player 5 hand :
+( T of spades, 5 of spades, K of hearts, 8 of hearts,
+3 of hearts, J of diamonds, 6 of diamonds, A of clubs, 9 of clubs,
+4 of clubs ))
+
+Printing hands from a shuffled deck:
+Player 1 hand :
+( A of spades, 9 of spades, 4 of spades, Q of hearts,
+7 of hearts, 2 of hearts, T of diamonds, 5 of diamonds, K of clubs,
+8 of clubs, 3 of clubs, A of diamonds, 7 of spades, 7 of hearts,
+6 of spades, 8 of clubs, J of spades, 9 of hearts, Q of diamonds,
+J of clubs, 3 of hearts, T of clubs ))
+
+Player 2 hand :
+( K of spades, 8 of spades, 3 of spades, J of hearts,
+6 of hearts, A of diamonds, 9 of diamonds, 4 of diamonds, Q of clubs,
+7 of clubs, 2 of clubs, K of clubs, 3 of clubs, 3 of diamonds,
+A of clubs, 2 of hearts, 2 of clubs, 8 of hearts, 4 of spades,
+J of diamonds, T of diamonds, Q of spades ))
+
+Player 3 hand :
+( Q of spades, 7 of spades, 2 of spades, T of hearts,
+5 of hearts, K of diamonds, 8 of diamonds, 3 of diamonds, J of clubs,
+6 of clubs, 7 of diamonds, 2 of diamonds, 5 of hearts, A of hearts,
+4 of clubs, 9 of spades, 7 of clubs, Q of hearts, 8 of diamonds,
+9 of clubs ))
+
+Player 4 hand :
+( J of spades, 6 of spades, A of hearts, 9 of hearts,
+4 of hearts, Q of diamonds, 7 of diamonds, 2 of diamonds, T of clubs,
+5 of clubs, 3 of spades, K of diamonds, 6 of diamonds, 5 of spades,
+T of spades, J of hearts, 5 of diamonds, 9 of diamonds, Q of clubs,
+K of hearts ))
+
+Player 5 hand :
+( T of spades, 5 of spades, K of hearts, 8 of hearts,
+3 of hearts, J of diamonds, 6 of diamonds, A of clubs, 9 of clubs,
+4 of clubs, A of spades, T of hearts, 5 of clubs, 8 of spades,
+2 of spades, 6 of clubs, 6 of hearts, 4 of diamonds, 4 of hearts,
+K of spades ))
+
  */
