@@ -65,6 +65,7 @@ public class Assign3
         System.out.println(h);
 
         System.out.println("\nTesting inspectCard()");
+        System.out.println(h.inspectCard(1)); // legal index
         System.out.println(h.inspectCard(99)); // illegal index
         for(int index = 0; index < h.myCards.length; index++)
         {
@@ -628,6 +629,7 @@ A of spades, A of hearts, 2 of clubs, A of spades, A of hearts,
 2 of clubs )
 
 Testing inspectCard()
+2 of clubs
 Invalid
 Playing A of hearts
 Playing 2 of clubs
