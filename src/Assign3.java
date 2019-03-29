@@ -237,7 +237,7 @@ class Card
      */
     public Card(char value, Suit suit)
     {
-        errorFlag = set(value, suit);
+        set(value, suit);
     }
 
     /**
@@ -245,7 +245,7 @@ class Card
      */
     public String toString()
     {
-        if (errorFlag == true)
+        if (errorFlag)
         {
             return "Invalid";
         } else
@@ -258,15 +258,18 @@ class Card
      * @param suit
      * @return If no errors are raised, sets suit of Card object.
      */
-    boolean set(char value, Suit suit)
+    public boolean set(char value, Suit suit)
     {
-        errorFlag = !isValid(value, suit); // set errorFlag to opposite of isValid
-        if(!errorFlag)
+
+        if(isValid(value, suit)) // if valid values, set the value and suit
         {
             this.value = value;
             this.suit = suit;
+            errorFlag = false;
+            return true;
         }
-        return !errorFlag;
+        errorFlag = true;
+        return false; // this will get assigned to errorFlag
     }
 
     /**
@@ -301,7 +304,6 @@ class Card
      * @param
      * @return True if Card objects are equal, false otherwise
      */
-    public boolean equals(Card card)
     public boolean equals(Card other)
     {
         return (this.value == other.value) && this.suit.equals(other.suit) && (this.errorFlag == other.errorFlag);
@@ -320,11 +322,11 @@ class Card
             if (cardRank[i] == value)
             {
                 //System.out.println("Valid");
-                return false;
+                return true;
             }
         }
         //System.out.println("Invalid");
-        return true;
+        return false;
     }
 }
 
