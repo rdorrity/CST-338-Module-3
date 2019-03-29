@@ -260,15 +260,13 @@ class Card
      */
     boolean set(char value, Suit suit)
     {
-        errorFlag = isValid(value, suit);
-        if (!errorFlag)
+        errorFlag = !isValid(value, suit); // set errorFlag to opposite of isValid
+        if(!errorFlag)
         {
             this.value = value;
             this.suit = suit;
-            return errorFlag;
-        } else
-            this.suit = suit;
-        return errorFlag;
+        }
+        return !errorFlag;
     }
 
     /**
@@ -304,12 +302,9 @@ class Card
      * @return True if Card objects are equal, false otherwise
      */
     public boolean equals(Card card)
+    public boolean equals(Card other)
     {
-        if (this.value == card.value && this.suit == card.suit)
-        {
-            return true;
-        } else
-            return false;
+        return (this.value == other.value) && this.suit.equals(other.suit) && (this.errorFlag == other.errorFlag);
     }
 
     /**
@@ -395,10 +390,9 @@ class Hand
     // Return if successful or not (boolean)
     public boolean takeCard(Card card)
     {
-
-        if (numCards < MAX_CARDS)
+        if(numCards < MAX_CARDS)
         {
-            myCards[numCards] = card;
+            myCards[numCards] = new Card(card.getValue(), card.getSuit());
             numCards++;
             return true;
         }
